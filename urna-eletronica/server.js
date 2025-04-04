@@ -51,13 +51,13 @@ app.get("/resultado", async (req, res) => {
 });
 
 // Iniciar servidor
-app.listen(5500, () => {
+app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000");
 
     const express = require('express');
 const Registro = require('./Registro');
 const app = express();
-const port = 5500;
+const port = 3000;
 
 app.use(express.json());
 
