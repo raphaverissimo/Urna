@@ -51,7 +51,7 @@ app.get("/resultado", async (req, res) => {
 });
 
 // Iniciar servidor
-app.listen(3000, () => {
+app.listen(5500, () => {
     console.log("Servidor rodando na porta 3000");
 
     const express = require('express');
