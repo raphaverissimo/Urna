@@ -15,10 +15,40 @@
       align-items: center;
       height: 100vh;
     }
+
     .container {
       display: flex;
       gap: 50px;
     }
+
+    .urna-brilhante {
+      position: relative;
+      padding: 10px;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    .urna-brilhante::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #00f0ff, #00ff88, #ff00e0, #00f0ff);
+      background-size: 600% 600%;
+      border-radius: 30px;
+      filter: blur(15px);
+      z-index: -1;
+      animation: brilhoAnimado 6s ease infinite;
+    }
+
+    @keyframes brilhoAnimado {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .urna {
       background: black;
       padding: 20px;
@@ -27,6 +57,7 @@
       width: 350px;
       border: 5px solid gray;
     }
+
     .tela {
       background: #c0c0c0;
       color: black;
@@ -34,6 +65,7 @@
       border-radius: 5px;
       margin-bottom: 15px;
     }
+
     .foto-candidato {
       width: 100px;
       height: 120px;
@@ -42,6 +74,7 @@
       display: none;
       border: 2px solid black;
     }
+
     .teclado {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -49,6 +82,7 @@
       justify-items: center;
       margin-top: 10px;
     }
+
     button {
       width: 100px;
       height: 50px;
@@ -57,13 +91,16 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .btn-confirma { background: #0a5; color: white; }
     .btn-corrige { background: #f90; color: white; }
     .btn-branco { background: #fff; color: black; }
     .btn-numero { background: #555; color: white; }
+
     .candidatos {
       text-align: left;
     }
+
     .candidatos p {
       font-size: 20px;
       margin: 10px 0;
@@ -76,38 +113,41 @@
       <p><strong>13 - Lula</strong></p>
       <p><strong>22 - Bolsonaro</strong></p>
     </div>
-    <div class="urna">
-      <div class="tela">
-        <h2>Urna Eletrônica</h2>
-        <p id="mensagem">Digite seu voto:</p>
-        <p id="voto" style="font-size: 24px; font-weight: bold;">_</p>
-        <img id="foto" class="foto-candidato" src="" alt="Candidato"/>
+
+    <div class="urna-brilhante">
+      <div class="urna">
+        <div class="tela">
+          <h2>Urna Eletrônica</h2>
+          <p id="mensagem">Digite seu voto:</p>
+          <p id="voto" style="font-size: 24px; font-weight: bold;">_</p>
+          <img id="foto" class="foto-candidato" src="" alt="Candidato"/>
+        </div>
+        <div class="teclado">
+          <button class="btn-numero" onclick="digitar('1')">1</button>
+          <button class="btn-numero" onclick="digitar('2')">2</button>
+          <button class="btn-numero" onclick="digitar('3')">3</button>
+          <button class="btn-numero" onclick="digitar('4')">4</button>
+          <button class="btn-numero" onclick="digitar('5')">5</button>
+          <button class="btn-numero" onclick="digitar('6')">6</button>
+          <button class="btn-numero" onclick="digitar('7')">7</button>
+          <button class="btn-numero" onclick="digitar('8')">8</button>
+          <button class="btn-numero" onclick="digitar('9')">9</button>
+          <button class="btn-branco" onclick="votarBranco()">Branco</button>
+          <button class="btn-numero" onclick="digitar('0')">0</button>
+          <button class="btn-corrige" onclick="corrigir()">Corrige</button>
+          <button class="btn-confirma" onclick="confirmar()" style="grid-column: span 3;">Confirma</button>
+        </div>
+        <h3>Resultado:</h3>
+        <p id="resultado">Nenhum voto registrado.</p>
+        <button class="btn-confirma" onclick="apurarVotos()">Encerrar Votação</button>
       </div>
-      <div class="teclado">
-        <button class="btn-numero" onclick="digitar('1')">1</button>
-        <button class="btn-numero" onclick="digitar('2')">2</button>
-        <button class="btn-numero" onclick="digitar('3')">3</button>
-        <button class="btn-numero" onclick="digitar('4')">4</button>
-        <button class="btn-numero" onclick="digitar('5')">5</button>
-        <button class="btn-numero" onclick="digitar('6')">6</button>
-        <button class="btn-numero" onclick="digitar('7')">7</button>
-        <button class="btn-numero" onclick="digitar('8')">8</button>
-        <button class="btn-numero" onclick="digitar('9')">9</button>
-        <button class="btn-branco" onclick="votarBranco()">Branco</button>
-        <button class="btn-numero" onclick="digitar('0')">0</button>
-        <button class="btn-corrige" onclick="corrigir()">Corrige</button>
-        <button class="btn-confirma" onclick="confirmar()" style="grid-column: span 3;">Confirma</button>
-      </div>
-      <h3>Resultado:</h3>
-      <p id="resultado">Nenhum voto registrado.</p>
-      <button class="btn-confirma" onclick="apurarVotos()">Encerrar Votação</button>
     </div>
   </div>
 
   <script>
     let votoAtual = "";
     let votacaoAtiva = true;
-    
+
     function digitar(numero) {
         if (votoAtual.length < 2) {
             votoAtual += numero;
@@ -115,25 +155,25 @@
         }
         atualizarFoto();
     }
-    
+
     function corrigir() {
         votoAtual = "";
         document.getElementById('voto').innerText = "_";
         document.getElementById('foto').style.display = "none";
     }
-    
+
     function votarBranco() {
         if (!votacaoAtiva) return;
-    
+
         enviarVoto("Branco");
         corrigir();
     }
-    
+
     async function confirmar() {
         if (!votacaoAtiva) return;
-    
+
         let candidato = null;
-    
+
         if (votoAtual === "13") {
             candidato = "Lula";
         } else if (votoAtual === "22") {
@@ -143,11 +183,11 @@
             corrigir();
             return;
         }
-    
+
         await enviarVoto(candidato);
         corrigir();
     }
-    
+
     async function enviarVoto(candidato) {
         try {
             const response = await fetch("http://localhost:3000/votar", {
@@ -157,12 +197,12 @@
                 },
                 body: JSON.stringify({ candidato })
             });
-    
+
             if (!response.ok) {
                 const erro = await response.json();
                 throw new Error(erro.erro || "Erro desconhecido ao votar.");
             }
-    
+
             const data = await response.json();
             alert(data.mensagem || "Voto computado com sucesso!");
         } catch (error) {
@@ -170,11 +210,11 @@
             alert("Erro ao se comunicar com o servidor.");
         }
     }
-    
+
     async function atualizarFoto() {
         let voto = votoAtual;
         let foto = document.getElementById('foto');
-    
+
         if (voto === "13") {
             foto.src = "imagens/lula.jpg";
             foto.style.display = "block";
@@ -185,12 +225,12 @@
             foto.style.display = "none";
         }
     }
-    
+
     function apurarVotos() {
         votacaoAtiva = false;
         alert("BOa sorte com seu novo presidente se votou no Lula Se lascou.");
     }
-    </script>
-    
+  </script>
+
 </body>
 </html>
