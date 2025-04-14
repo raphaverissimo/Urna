@@ -13,12 +13,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .container {
       display: flex;
+      flex-direction: row;
       gap: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
     }
 
     .urna-brilhante {
@@ -54,7 +60,8 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      width: 350px;
+      width: 100%;
+      max-width: 350px;
       border: 5px solid gray;
     }
 
@@ -84,7 +91,8 @@
     }
 
     button {
-      width: 100px;
+      width: 100%;
+      max-width: 100px;
       height: 50px;
       font-size: 20px;
       border: none;
@@ -99,11 +107,19 @@
 
     .candidatos {
       text-align: left;
+      max-width: 300px;
     }
 
     .candidatos p {
       font-size: 20px;
       margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -228,7 +244,7 @@
 
     function apurarVotos() {
         votacaoAtiva = false;
-        alert("BOa sorte com seu novo presidente se votou no Lula Se lascou.");
+        alert("Boa sorte com seu novo presidente. Se votou no Lula, se lascou.");
     }
   </script>
 
