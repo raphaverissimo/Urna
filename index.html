@@ -13,36 +13,32 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
+      height: 100vh;
     }
 
     .container {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       gap: 50px;
     }
 
     .urna-brilhante {
       position: relative;
+      padding: 10px;
       border-radius: 20px;
-      overflow: hidden;
       z-index: 1;
     }
 
     .urna-brilhante::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
       background: linear-gradient(45deg, #00f0ff, #00ff88, #ff00e0, #00f0ff);
       background-size: 600% 600%;
-      border-radius: 20px;
-      filter: blur(10px);
+      border-radius: 30px;
+      filter: blur(15px);
       z-index: -1;
       animation: brilhoAnimado 6s ease infinite;
     }
@@ -58,8 +54,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      width: 100%;
-      max-width: 350px;
+      width: 350px;
       border: 5px solid gray;
     }
 
@@ -89,8 +84,7 @@
     }
 
     button {
-      width: 100%;
-      max-width: 100px;
+      width: 100px;
       height: 50px;
       font-size: 20px;
       border: none;
@@ -100,12 +94,11 @@
 
     .btn-confirma { background: #0a5; color: white; }
     .btn-corrige { background: #f90; color: white; }
-    .btn-branco  { background: #fff; color: black; }
-    .btn-numero  { background: #555; color: white; }
+    .btn-branco { background: #fff; color: black; }
+    .btn-numero { background: #555; color: white; }
 
     .candidatos {
       text-align: left;
-      max-width: 300px;
     }
 
     .candidatos p {
@@ -235,8 +228,9 @@
 
     function apurarVotos() {
         votacaoAtiva = false;
-        alert("Boa sorte com seu novo presidente. Se votou no Lula, se lascou.");
+        alert("BOa sorte com seu novo presidente se votou no Lula Se lascou.");
     }
   </script>
+
 </body>
 </html>
