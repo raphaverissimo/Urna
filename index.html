@@ -14,37 +14,35 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      margin: 0;
       padding: 20px;
-      box-sizing: border-box;
     }
 
     .container {
       display: flex;
-      flex-direction: row;
-      gap: 50px;
       flex-wrap: wrap;
       justify-content: center;
-      width: 100%;
+      gap: 50px;
     }
 
     .urna-brilhante {
       position: relative;
-      padding: 10px;
       border-radius: 20px;
+      overflow: hidden;
       z-index: 1;
     }
 
     .urna-brilhante::before {
       content: '';
       position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: linear-gradient(45deg, #00f0ff, #00ff88, #ff00e0, #00f0ff);
       background-size: 600% 600%;
-      border-radius: 30px;
-      filter: blur(15px);
+      border-radius: 20px;
+      filter: blur(10px);
       z-index: -1;
       animation: brilhoAnimado 6s ease infinite;
     }
@@ -102,8 +100,8 @@
 
     .btn-confirma { background: #0a5; color: white; }
     .btn-corrige { background: #f90; color: white; }
-    .btn-branco { background: #fff; color: black; }
-    .btn-numero { background: #555; color: white; }
+    .btn-branco  { background: #fff; color: black; }
+    .btn-numero  { background: #555; color: white; }
 
     .candidatos {
       text-align: left;
@@ -113,13 +111,6 @@
     .candidatos p {
       font-size: 20px;
       margin: 10px 0;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
@@ -247,6 +238,5 @@
         alert("Boa sorte com seu novo presidente. Se votou no Lula, se lascou.");
     }
   </script>
-
 </body>
 </html>
