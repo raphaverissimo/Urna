@@ -6,154 +6,176 @@
   <title>Urna Eletrônica 2025</title>
   <style>
     * {
-      box-sizing: border-box;
-    }
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-      text-align: center;
-      z-index: 0;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+}
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(135deg, #e5e4e2, #cfd8dc, #b0bec5, #cfd8dc, #e5e4e2);
-      background-size: 400% 400%;
-      animation: metalicoAnimado 10s ease infinite;
-      z-index: -2;
-      opacity: 0.8;
-    }
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #e5e4e2, #cfd8dc, #b0bec5, #cfd8dc, #e5e4e2);
+  background-size: 400% 400%;
+  animation: metalicoAnimado 10s ease infinite;
+  z-index: -2;
+  opacity: 0.8;
+}
 
-    @keyframes metalicoAnimado {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes metalicoAnimado {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    video#bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      z-index: -3;
-    }
+video#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -3;
+}
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      padding: 20px;
-    }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  max-width: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
-    @media (min-width: 768px) {
-      .container {
-        flex-direction: row;
-        gap: 50px;
-      }
-    }
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    gap: 40px;
+  }
+}
 
-    .urna-brilhante {
-      position: relative;
-      padding: 10px;
-      border-radius: 20px;
-      z-index: 1;
-    }
+.urna-brilhante {
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+  z-index: 1;
+  max-width: 100%;
+}
 
-    .urna-brilhante::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, #ffff00, #0000ff, #00f0ff, #ffff00);
-      background-size: 600% 600%;
-      border-radius: 30px;
-      filter: blur(15px);
-      z-index: -1;
-      animation: brilhoAnimado 6s ease infinite;
-    }
+.urna-brilhante::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #ffff00, #0000ff, #00f0ff, #ffff00);
+  background-size: 600% 600%;
+  border-radius: 30px;
+  filter: blur(15px);
+  z-index: -1;
+  animation: brilhoAnimado 6s ease infinite;
+}
 
-    @keyframes brilhoAnimado {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes brilhoAnimado {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    .urna {
-      background: black;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      width: 100%;
-      max-width: 350px;
-      border: 5px solid gray;
-    }
+.urna {
+  background: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 350px;
+  border: 5px solid gray;
+}
 
-    .tela {
-      background: #c0c0c0;
-      color: black;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
+.tela {
+  background: #c0c0c0;
+  color: black;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
 
-    .foto-candidato {
-      width: 100px;
-      height: 120px;
-      margin: 10px auto;
-      background-color: white;
-      display: none;
-      border: 2px solid black;
-    }
+.foto-candidato {
+  width: 100px;
+  height: 120px;
+  margin: 10px auto;
+  background-color: white;
+  display: none;
+  border: 2px solid black;
+}
 
-    .teclado {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      justify-items: center;
-      margin-top: 10px;
-    }
+.teclado {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+  margin-top: 10px;
+}
 
-    button {
-      width: 100%;
-      max-width: 100px;
-      height: 50px;
-      font-size: 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+button {
+  width: 100%;
+  max-width: 100px;
+  height: 50px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .btn-confirma { background: #0a5; color: white; }
-    .btn-corrige { background: #f90; color: white; }
-    .btn-branco  { background: #fff; color: black; }
-    .btn-numero  { background: #555; color: white; }
+@media (max-width: 480px) {
+  button {
+    font-size: 16px;
+    height: 45px;
+  }
 
-    .candidatos {
-      text-align: left;
-    }
+  .urna {
+    max-width: 95%;
+  }
 
-    .candidatos p {
-      font-size: 20px;
-      margin: 10px 0;
-    }
+  .tela h2 {
+    font-size: 20px;
+  }
+}
+
+.btn-confirma { background: #0a5; color: white; }
+.btn-corrige { background: #f90; color: white; }
+.btn-branco  { background: #fff; color: black; }
+.btn-numero  { background: #555; color: white; }
+
+.candidatos {
+  text-align: center;
+}
+
+.candidatos p {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
   </style>
 </head>
 <body>
