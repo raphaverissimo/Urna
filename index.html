@@ -28,26 +28,27 @@
       z-index: 1;
     }
 
-    .urna-brilhante::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, #00f0ff, #00ff88, #ff00e0, #00f0ff);
-      background-size: 600% 600%;
-      border-radius: 30px;
-      filter: blur(15px);
-      z-index: -1;
-      animation: brilhoAnimado 6s ease infinite;
-    }
+.urna-brilhante::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #FFD700, #1E90FF, #FFD700, #1E90FF); /* amarelo e azul */
+  background-size: 600% 600%;
+  border-radius: 30px;
+  filter: blur(15px);
+  z-index: -1;
+  animation: brilhoAnimado 6s ease infinite;
+}
 
-    @keyframes brilhoAnimado {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes brilhoAnimado {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
     .urna {
       background: black;
