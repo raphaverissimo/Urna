@@ -5,51 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Urna Eletrônica 2025</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom right, #32CD32, #FFD700); /* fundo verde/amarelo */
       color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      position: relative;
+      height: 100vh;
       overflow: hidden;
+      position: relative;
+      text-align: center;
+      z-index: 0;
     }
 
     body::before {
       content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, transparent 60%);
-      transform: rotate(0deg);
-      animation: espelhadoAnimado 3s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #e5e4e2, #cfd8dc, #b0bec5, #cfd8dc, #e5e4e2);
+      background-size: 400% 400%;
+      animation: metalicoAnimado 10s ease infinite;
+      z-index: -2;
+      opacity: 0.8;
     }
 
-    @keyframes espelhadoAnimado {
-      0% {
-        transform: rotate(0deg) translateX(-100%);
-      }
-      50% {
-        transform: rotate(0deg) translateX(100%);
-      }
-      100% {
-        transform: rotate(0deg) translateX(-100%);
-      }
+    @keyframes metalicoAnimado {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    video#bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -3;
     }
 
     .container {
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 30px;
       padding: 20px;
     }
@@ -57,6 +64,7 @@
     @media (min-width: 768px) {
       .container {
         flex-direction: row;
+        gap: 50px;
       }
     }
 
@@ -70,14 +78,14 @@
     .urna-brilhante::before {
       content: '';
       position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: linear-gradient(45deg, #0057ff, #ffe600, #0057ff, #ffe600);
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #ffff00, #0000ff, #00f0ff, #ffff00);
       background-size: 600% 600%;
-      border-radius: 20px;
-      filter: blur(12px);
+      border-radius: 30px;
+      filter: blur(15px);
       z-index: -1;
       animation: brilhoAnimado 6s ease infinite;
     }
@@ -89,15 +97,13 @@
     }
 
     .urna {
-      background: #22C1C3;
-      background: linear-gradient(0deg,rgba(34, 193, 195, 1) 45%, rgba(253, 187, 45, 1) 56%);
+      background: black;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       width: 100%;
       max-width: 350px;
       border: 5px solid gray;
-      z-index: 1;
     }
 
     .tela {
@@ -137,12 +143,11 @@
 
     .btn-confirma { background: #0a5; color: white; }
     .btn-corrige { background: #f90; color: white; }
-    .btn-branco { background: #fff; color: black; }
-    .btn-numero { background: #555; color: white; }
+    .btn-branco  { background: #fff; color: black; }
+    .btn-numero  { background: #555; color: white; }
 
     .candidatos {
       text-align: left;
-      color: white;
     }
 
     .candidatos p {
@@ -152,6 +157,11 @@
   </style>
 </head>
 <body>
+  <video id="bg-video" autoplay muted loop>
+    <source src="seuvideo.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo em plano de fundo.
+  </video>
+
   <div class="container">
     <div class="candidatos">
       <p><strong>13 - Lula</strong></p>
@@ -193,84 +203,86 @@
     let votacaoAtiva = true;
 
     function digitar(numero) {
-      if (votoAtual.length < 2) {
-        votoAtual += numero;
-        document.getElementById('voto').innerText = votoAtual;
-      }
-      atualizarFoto();
+        if (votoAtual.length < 2) {
+            votoAtual += numero;
+            document.getElementById('voto').innerText = votoAtual;
+        }
+        atualizarFoto();
     }
 
     function corrigir() {
-      votoAtual = "";
-      document.getElementById('voto').innerText = "_";
-      document.getElementById('foto').style.display = "none";
+        votoAtual = "";
+        document.getElementById('voto').innerText = "_";
+        document.getElementById('foto').style.display = "none";
     }
 
     function votarBranco() {
-      if (!votacaoAtiva) return;
-      enviarVoto("Branco");
-      corrigir();
+        if (!votacaoAtiva) return;
+
+        enviarVoto("Branco");
+        corrigir();
     }
 
     async function confirmar() {
-      if (!votacaoAtiva) return;
-      let candidato = null;
+        if (!votacaoAtiva) return;
 
-      if (votoAtual === "13") {
-        candidato = "Lula";
-      } else if (votoAtual === "22") {
-        candidato = "Bolsonaro";
-      } else {
-        alert("Voto nulo!");
+        let candidato = null;
+
+        if (votoAtual === "13") {
+            candidato = "Lula";
+        } else if (votoAtual === "22") {
+            candidato = "Bolsonaro";
+        } else {
+            alert("Voto nulo!");
+            corrigir();
+            return;
+        }
+
+        await enviarVoto(candidato);
         corrigir();
-        return;
-      }
-
-      await enviarVoto(candidato);
-      corrigir();
     }
 
     async function enviarVoto(candidato) {
-      try {
-        const response = await fetch("http://localhost:3000/votar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ candidato })
-        });
+        try {
+            const response = await fetch("http://localhost:3000/votar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ candidato })
+            });
 
-        if (!response.ok) {
-          const erro = await response.json();
-          throw new Error(erro.erro || "Erro desconhecido ao votar.");
+            if (!response.ok) {
+                const erro = await response.json();
+                throw new Error(erro.erro || "Erro desconhecido ao votar.");
+            }
+
+            const data = await response.json();
+            alert(data.mensagem || "Voto computado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao se comunicar com o servidor:", error);
+            alert("Erro ao se comunicar com o servidor.");
         }
-
-        const data = await response.json();
-        alert(data.mensagem || "Voto computado com sucesso!");
-      } catch (error) {
-        console.error("Erro ao se comunicar com o servidor:", error);
-        alert("Erro ao se comunicar com o servidor.");
-      }
     }
 
-    async function atualizarFoto() {
-      let voto = votoAtual;
-      let foto = document.getElementById('foto');
+    function atualizarFoto() {
+        let voto = votoAtual;
+        let foto = document.getElementById('foto');
 
-      if (voto === "13") {
-        foto.src = "imagens/lula.jpg";
-        foto.style.display = "block";
-      } else if (voto === "22") {
-        foto.src = "imagens/Bolsonaro.jpg";
-        foto.style.display = "block";
-      } else {
-        foto.style.display = "none";
-      }
+        if (voto === "13") {
+            foto.src = "imagens/lula.jpg";
+            foto.style.display = "block";
+        } else if (voto === "22") {
+            foto.src = "imagens/Bolsonaro.jpg";
+            foto.style.display = "block";
+        } else {
+            foto.style.display = "none";
+        }
     }
 
     function apurarVotos() {
-      votacaoAtiva = false;
-      alert("Boa sorte com seu novo presidente! Se votou no Lula, se lascou.");
+        votacaoAtiva = false;
+        alert("Boa sorte com seu novo presidente. Se votou no Lula... Se lascou.");
     }
   </script>
 </body>
