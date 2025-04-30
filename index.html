@@ -19,33 +19,15 @@
       height: 100vh;
     }
 
-    @keyframes brilhoMetalico {
-      0% {
-        box-shadow: 0 0 10px #ccc, 0 0 20px #999;
-      }
-      25% {
-        box-shadow: 0 0 15px #c0f, 0 0 30px #f0f;
-      }
-      50% {
-        box-shadow: 0 0 15px #0ff, 0 0 30px #0cf;
-      }
-      75% {
-        box-shadow: 0 0 15px #fc0, 0 0 30px #fa0;
-      }
-      100% {
-        box-shadow: 0 0 10px #ccc, 0 0 20px #999;
-      }
-    }
-
     .urna-container {
       display: flex;
       background: #ccc;
       border: 8px solid #999;
       border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
       max-width: 800px;
       width: 95%;
       overflow: hidden;
-      animation: brilhoMetalico 4s infinite ease-in-out;
     }
 
     .tela {
@@ -211,7 +193,7 @@
 
     async function enviarVoto(candidato) {
       try {
-        const response = await fetch("https://urna-backend.onrender.com/votar", {
+        const response = await fetch("http://localhost:3000/votar", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
