@@ -6,217 +6,148 @@
   <title>Urna Eletrônica 2025</title>
   <style>
     * {
-  box-sizing: border-box;
-}
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  z-index: 0;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #d9d9d9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(135deg, #e5e4e2, #cfd8dc, #b0bec5, #cfd8dc, #e5e4e2);
-  background-size: 400% 400%;
-  animation: metalicoAnimado 10s ease infinite;
-  z-index: -2;
-  opacity: 0.8;
-}
+    .urna-container {
+      display: flex;
+      background: #ccc;
+      border: 8px solid #999;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 800px;
+      width: 95%;
+      overflow: hidden;
+    }
 
-@keyframes metalicoAnimado {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    .tela {
+      background: #e0e0e0;
+      padding: 20px;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 3px solid #999;
+    }
 
-video#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  z-index: -3;
-}
+    .tela h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #333;
+    }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-  max-width: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
+    .info-voto {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #000;
+    }
 
-@media (min-width: 768px) {
-  .container {
-    flex-direction: row;
-    gap: 40px;
-  }
-}
+    #foto {
+      width: 120px;
+      height: 140px;
+      border: 2px solid #000;
+      background: white;
+      margin-top: 10px;
+      display: none;
+    }
 
-.urna-brilhante {
-  position: relative;
-  padding: 10px;
-  border-radius: 20px;
-  z-index: 1;
-  max-width: 100%;
-}
+    .teclado {
+      background: #333;
+      padding: 20px;
+      width: 40%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
 
-.urna-brilhante::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: linear-gradient(45deg, #ffff00, #0000ff, #00f0ff, #ffff00);
-  background-size: 600% 600%;
-  border-radius: 30px;
-  filter: blur(15px);
-  z-index: -1;
-  animation: brilhoAnimado 6s ease infinite;
-}
+    button {
+      height: 50px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-@keyframes brilhoAnimado {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    .btn-numero {
+      background: #555;
+      color: #fff;
+    }
 
-.urna {
-  background: black;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  width: 100%;
-  max-width: 350px;
-  border: 5px solid gray;
-}
+    .btn-branco {
+      background: #fff;
+      color: #000;
+      grid-column: span 3;
+    }
 
-.tela {
-  background: #c0c0c0;
-  color: black;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
+    .btn-corrige {
+      background: #f90;
+      color: #fff;
+      grid-column: span 3;
+    }
 
-.foto-candidato {
-  width: 100px;
-  height: 120px;
-  margin: 10px auto;
-  background-color: white;
-  display: none;
-  border: 2px solid black;
-}
+    .btn-confirma {
+      background: #0a5;
+      color: #fff;
+      grid-column: span 3;
+    }
 
-.teclado {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-items: center;
-  margin-top: 10px;
-}
+    .resultado {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #222;
+    }
 
-button {
-  width: 100%;
-  max-width: 100px;
-  height: 50px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-@media (max-width: 480px) {
-  button {
-    font-size: 16px;
-    height: 45px;
-  }
-
-  .urna {
-    max-width: 95%;
-  }
-
-  .tela h2 {
-    font-size: 20px;
-  }
-}
-
-.btn-confirma { background: #0a5; color: white; }
-.btn-corrige { background: #f90; color: white; }
-.btn-branco  { background: #fff; color: black; }
-.btn-numero  { background: #555; color: white; }
-
-.candidatos {
-  text-align: center;
-}
-
-.candidatos p {
-  font-size: 20px;
-  margin: 10px 0;
-}
-
+    @media (max-width: 600px) {
+      .urna-container {
+        flex-direction: column;
+      }
+      .tela, .teclado {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
-  <video id="bg-video" autoplay muted loop>
-    <source src="seuvideo.mp4" type="video/mp4" />
-    Seu navegador não suporta vídeo em plano de fundo.
-  </video>
-
-  <div class="container">
-    <div class="candidatos">
-      <p><strong>13 - Lula</strong></p>
-      <p><strong>22 - Bolsonaro</strong></p>
-    </div>
-
-    <div class="urna-brilhante">
-      <div class="urna">
-        <div class="tela">
-          <h2>Urna Eletrônica</h2>
-          <p id="mensagem">Digite seu voto:</p>
-          <p id="voto" style="font-size: 24px; font-weight: bold;">_</p>
-          <img id="foto" class="foto-candidato" src="" alt="Candidato"/>
-        </div>
-        <div class="teclado">
-          <button class="btn-numero" onclick="digitar('1')">1</button>
-          <button class="btn-numero" onclick="digitar('2')">2</button>
-          <button class="btn-numero" onclick="digitar('3')">3</button>
-          <button class="btn-numero" onclick="digitar('4')">4</button>
-          <button class="btn-numero" onclick="digitar('5')">5</button>
-          <button class="btn-numero" onclick="digitar('6')">6</button>
-          <button class="btn-numero" onclick="digitar('7')">7</button>
-          <button class="btn-numero" onclick="digitar('8')">8</button>
-          <button class="btn-numero" onclick="digitar('9')">9</button>
-          <button class="btn-branco" onclick="votarBranco()">Branco</button>
-          <button class="btn-numero" onclick="digitar('0')">0</button>
-          <button class="btn-corrige" onclick="corrigir()">Corrige</button>
-          <button class="btn-confirma" onclick="confirmar()" style="grid-column: span 3;">Confirma</button>
-        </div>
-        <h3>Resultado:</h3>
+  <div class="urna-container">
+    <div class="tela">
+      <div>
+        <h2>JUSTIÇA ELEITORAL</h2>
+        <p id="mensagem">Digite seu voto:</p>
+        <p id="voto" class="info-voto">_</p>
+        <img id="foto" src="" alt="Foto do Candidato">
+      </div>
+      <div class="resultado">
+        <h4>Resultado:</h4>
         <p id="resultado">Nenhum voto registrado.</p>
         <button class="btn-confirma" onclick="apurarVotos()">Encerrar Votação</button>
       </div>
+    </div>
+    <div class="teclado">
+      <button class="btn-numero" onclick="digitar('1')">1</button>
+      <button class="btn-numero" onclick="digitar('2')">2</button>
+      <button class="btn-numero" onclick="digitar('3')">3</button>
+      <button class="btn-numero" onclick="digitar('4')">4</button>
+      <button class="btn-numero" onclick="digitar('5')">5</button>
+      <button class="btn-numero" onclick="digitar('6')">6</button>
+      <button class="btn-numero" onclick="digitar('7')">7</button>
+      <button class="btn-numero" onclick="digitar('8')">8</button>
+      <button class="btn-numero" onclick="digitar('9')">9</button>
+      <button class="btn-numero" onclick="digitar('0')">0</button>
+      <button class="btn-branco" onclick="votarBranco()">BRANCO</button>
+      <button class="btn-corrige" onclick="corrigir()">CORRIGE</button>
+      <button class="btn-confirma" onclick="confirmar()">CONFIRMA</button>
     </div>
   </div>
 
@@ -225,86 +156,82 @@ button {
     let votacaoAtiva = true;
 
     function digitar(numero) {
-        if (votoAtual.length < 2) {
-            votoAtual += numero;
-            document.getElementById('voto').innerText = votoAtual;
-        }
+      if (votoAtual.length < 2) {
+        votoAtual += numero;
+        document.getElementById('voto').innerText = votoAtual;
         atualizarFoto();
+      }
     }
 
     function corrigir() {
-        votoAtual = "";
-        document.getElementById('voto').innerText = "_";
-        document.getElementById('foto').style.display = "none";
+      votoAtual = "";
+      document.getElementById('voto').innerText = "_";
+      document.getElementById('foto').style.display = "none";
     }
 
     function votarBranco() {
-        if (!votacaoAtiva) return;
-
-        enviarVoto("Branco");
-        corrigir();
+      if (!votacaoAtiva) return;
+      enviarVoto("Branco");
+      corrigir();
     }
 
     async function confirmar() {
-        if (!votacaoAtiva) return;
+      if (!votacaoAtiva) return;
 
-        let candidato = null;
-
-        if (votoAtual === "13") {
-            candidato = "Lula";
-        } else if (votoAtual === "22") {
-            candidato = "Bolsonaro";
-        } else {
-            alert("Voto nulo!");
-            corrigir();
-            return;
-        }
-
-        await enviarVoto(candidato);
+      let candidato = null;
+      if (votoAtual === "13") candidato = "Lula";
+      else if (votoAtual === "22") candidato = "Bolsonaro";
+      else {
+        alert("Voto nulo!");
         corrigir();
+        return;
+      }
+
+      await enviarVoto(candidato);
+      corrigir();
     }
 
     async function enviarVoto(candidato) {
-        try {
-            const response = await fetch("http://localhost:3000/votar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ candidato })
-            });
+      try {
+        const response = await fetch("http://localhost:3000/votar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ candidato })
+        });
 
-            if (!response.ok) {
-                const erro = await response.json();
-                throw new Error(erro.erro || "Erro desconhecido ao votar.");
-            }
-
-            const data = await response.json();
-            alert(data.mensagem || "Voto computado com sucesso!");
-        } catch (error) {
-            console.error("Erro ao se comunicar com o servidor:", error);
-            alert("Erro ao se comunicar com o servidor.");
+        if (!response.ok) {
+          const erro = await response.json();
+          throw new Error(erro.erro || "Erro desconhecido ao votar.");
         }
+
+        const data = await response.json();
+        alert(data.mensagem || "Voto computado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao se comunicar com o servidor:", error);
+        alert("Erro ao se comunicar com o servidor.");
+      }
     }
 
     function atualizarFoto() {
-        let voto = votoAtual;
-        let foto = document.getElementById('foto');
+      const voto = votoAtual;
+      const foto = document.getElementById('foto');
 
-        if (voto === "13") {
-            foto.src = "imagens/lula.jpg";
-            foto.style.display = "block";
-        } else if (voto === "22") {
-            foto.src = "imagens/Bolsonaro.jpg";
-            foto.style.display = "block";
-        } else {
-            foto.style.display = "none";
-        }
+      if (voto === "13") {
+        foto.src = "imagens/lula.jpg";
+        foto.style.display = "block";
+      } else if (voto === "22") {
+        foto.src = "imagens/bolsonaro.jpg";
+        foto.style.display = "block";
+      } else {
+        foto.style.display = "none";
+      }
     }
 
     function apurarVotos() {
-        votacaoAtiva = false;
-        alert("Boa sorte com seu novo presidente. Se votou no Lula... Se lascou.");
+      votacaoAtiva = false;
+      alert("Votação encerrada.");
     }
   </script>
 </body>
