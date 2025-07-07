@@ -151,11 +151,16 @@
     </div>
   </div>
 
+  <!-- Sons -->
+  <audio id="somTecla" src="tecla.mp3"></audio>
+  <audio id="somConfirma" src="tecla02.mp3"></audio>
+
   <script>
     let votoAtual = "";
     let votacaoAtiva = true;
 
     function digitar(numero) {
+      document.getElementById('somTecla').play(); // som da tecla
       if (votoAtual.length < 2) {
         votoAtual += numero;
         document.getElementById('voto').innerText = votoAtual;
@@ -177,6 +182,8 @@
 
     async function confirmar() {
       if (!votacaoAtiva) return;
+
+      document.getElementById('somConfirma').play(); // som de confirmação
 
       let candidato = null;
       if (votoAtual === "13") candidato = "Lula";
